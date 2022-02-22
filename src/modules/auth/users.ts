@@ -4,4 +4,4 @@ const users = [
   { id: 2, name: "Sarah", email: "sarah@mail.com", password: "sarah123" },
 ];
 
-module.exports = users;
+export default users;

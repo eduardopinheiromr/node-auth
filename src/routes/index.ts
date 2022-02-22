@@ -1,9 +1,12 @@
-const users = require("./auth/users");
-const jwt = require("jwt-simple");
-const auth = require("./auth")();
-const config = require("./auth/config");
+import jwt from "jwt-simple";
+import users from "../modules/auth/users";
+import config from "../modules/auth/config";
+import authMiddleware from "../modules/auth";
+import { Express } from "express";
 
-module.exports = (app) => {
+const auth = authMiddleware();
+
+export default (app: Express) => {
   app.get("/", function (req, res) {
     res.json({ status: "My API is alive!" });
   });
