@@ -55,4 +55,4 @@ Validate token from req.headers.authorization to get user ID and return data
 
 ## Technologies
 
-Node, Express, Passport | Passport JWT
+Node, Express, Passport | Passport JWT, TypeScript
