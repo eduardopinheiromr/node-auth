@@ -13,9 +13,8 @@ const params = {
 
 export default () => {
   const strategy = new Strategy(params, (payload, done) => {
-    const users = db.findAll("users");
+    const user = db.findById("users", payload.id);
 
-    const user = users[payload.id] || null;
     if (user) {
       return done(null, { id: user.id });
     } else {
