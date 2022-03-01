@@ -1,8 +1,8 @@
 import jwt from "jwt-simple";
-import users from "../modules/auth/users";
 import config from "../modules/auth/config";
 import authMiddleware from "../modules/auth";
 import { Express } from "express";
+import { db } from "../db";
 
 const auth = authMiddleware();
 
@@ -15,20 +15,35 @@ export default (app: Express) => {
     const token = req.headers.authorization.split(" ")[1];
     const decoded = jwt.decode(token, config.jwtSecret);
 
-    res.json(users.find((user) => user.id === decoded.id));
+    const user = db.findById("users", decoded.id);
+
+    res.json(user);
   });
 
-  app.post("/token", function (req, res) {
+  app.post("/register", (req, res) => {
+    const user = req.body;
+
+    const userCreated = db.create("users", user);
+
+    res.json(userCreated);
+  });
+
+  app.post("/login", function (req, res) {
     if (req.body.email && req.body.password) {
-      var email = req.body.email;
-      var password = req.body.password;
-      var user = users.find(function (u) {
-        return u.email === email && u.password === password;
-      });
+      const { email, password } = req.body;
+
+      const users = db.findAll("users");
+
+      const user = users.find(
+        (u) => u.email === email && u.password === password
+      );
+
       if (user) {
-        var payload = { id: user.id };
-        var token = jwt.encode(payload, config.jwtSecret);
-        res.json({ token: token });
+        const { password, ...userWithoutPassword } = user;
+        const payload = { id: user.id };
+        const token = jwt.encode(payload, config.jwtSecret);
+
+        res.json({ token, user: userWithoutPassword });
       } else {
         res.sendStatus(401);
       }

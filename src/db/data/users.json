@@ -1,0 +1,21 @@
+[
+  { "id": 1, "name": "John", "email": "john@mail.com", "password": "123" },
+  {
+    "id": 2,
+    "name": "Sarah",
+    "email": "sarah@mail.com",
+    "password": "sarah123"
+  },
+  {
+    "name": "Eduardo Pinheiro",
+    "email": "eduardo@mail.com",
+    "password": "123",
+    "id": "C25jt2TQYJ1tOOBVSojIw"
+  },
+  {
+    "name": "Ana Cornachi",
+    "email": "ana@mail.com",
+    "password": "123",
+    "id": "kgtxrM8E0XU-QPQ0sFrhK"
+  }
+]
