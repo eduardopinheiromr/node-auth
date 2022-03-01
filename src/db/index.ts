@@ -14,6 +14,12 @@ const findAll = (entity: string) => {
   return getDbByEntity(entity);
 };
 
+const find = (entity: string, key: string, value: string) => {
+  const db = getDbByEntity(entity);
+  const foundData = db.find((item: any) => item[key] === value);
+  return foundData;
+};
+
 const findById = (entity: string, id: string) => {
   const db = getDbByEntity(entity);
   const foundData = db.find((item: any) => item.id === id);
@@ -38,6 +44,7 @@ const remove = (entity: string, id: string) => {
 
 export const db = {
   findAll,
+  find,
   findById,
   create,
   update,

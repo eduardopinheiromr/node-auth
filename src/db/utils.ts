@@ -3,8 +3,14 @@ import path from "path";
 
 export const getDbByEntity = (entity: string) => {
   const filePath = path.join(__dirname, "data", `${entity}.json`);
-  const fileData = fs.readFileSync(filePath, "utf-8");
-  return JSON.parse(fileData);
+
+  try {
+    const fileData = fs.readFileSync(filePath, "utf-8");
+    return JSON.parse(fileData);
+  } catch {
+    fs.writeFileSync(filePath, "[]");
+    return [];
+  }
 };
 
 export const saveDbByEntity = (entity: string, data: any) => {
