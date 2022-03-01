@@ -19,8 +19,13 @@ export const cartRoutes = (app: Express) => {
   });
 
   app.put("/carts", auth.authenticate(), (req, res) => {
-    const cart = req.body;
-    const cartUpdated = db.update("carts", cart.id, cart);
+    const token = jwt.decode(req);
+    const updatedCart = req.body;
+    const currentCart = db.find("carts", "user_id", token.id);
+    const cartUpdated = db.update("carts", currentCart.id, {
+      ...currentCart,
+      ...updatedCart,
+    });
     res.json(cartUpdated);
   });
 

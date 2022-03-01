@@ -4,10 +4,10 @@ A simple project with Node.js and Express.js to demonstrate routes with **jwt to
 
 ## Running locally
 
-Install dependencies
+Install required global dependencies
 
 ```bash
-  yarn
+  yarn install:required
 ```
 
 Run in dev mode (nodemon)

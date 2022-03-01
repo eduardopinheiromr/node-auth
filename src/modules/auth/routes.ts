@@ -3,6 +3,7 @@ import { jwt } from "../../utils/token";
 import { Express } from "express";
 
 import authMiddleware from "./";
+import { decrypt, encrypt } from "../../utils/encrypt";
 const auth = authMiddleware();
 
 export const authRoutes = (app: Express) => {
@@ -14,12 +15,28 @@ export const authRoutes = (app: Express) => {
     res.json(user);
   });
 
-  app.post("/register", (req, res) => {
-    const user = req.body;
+  app.post("/register", async (req, res) => {
+    const userExists = db.find("users", "email", req.body.email);
 
-    const userCreated = db.create("users", user);
+    if (userExists) {
+      res.status(400).json({
+        message: "User already exists",
+      });
+    }
 
-    res.json(userCreated);
+    const createdUser = db.create("users", {
+      ...req.body,
+      password: await encrypt(req.body.password),
+    });
+
+    const { password, ...user } = createdUser;
+
+    const cart = db.create("carts", { user_id: user.id, products: [] });
+
+    const payload = { id: user.id };
+    const token = jwt.encode(payload);
+
+    res.json({ user, cart, token });
   });
 
   app.post("/login", (req, res) => {
@@ -29,7 +46,7 @@ export const authRoutes = (app: Express) => {
       const users = db.findAll("users");
 
       const user = users.find(
-        u => u.email === email && u.password === password
+        u => u.email === email && decrypt(password, u.password)
       );
 
       if (user) {
@@ -38,7 +55,7 @@ export const authRoutes = (app: Express) => {
 
         const token = jwt.encode(payload);
 
-        res.json({ token, user: userWithoutPassword });
+        res.json({ user: userWithoutPassword, token });
       } else {
         res.sendStatus(401);
       }
