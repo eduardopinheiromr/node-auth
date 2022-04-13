@@ -1,7 +1,7 @@
 import { Express } from "express";
-import { db } from "../../db";
-import { jwt } from "../../utils/token";
-import authMiddleware from "../auth";
+import { db } from "@db";
+import { jwt } from "@utils/token";
+import authMiddleware from "@modules/auth";
 const auth = authMiddleware();
 
 export const cartRoutes = (app: Express) => {

@@ -1,6 +1,6 @@
 import passport from "passport";
 import passportJWT from "passport-jwt";
-import { db } from "../../db";
+import { db } from "@db";
 import config from "./config";
 
 const ExtractJwt = passportJWT.ExtractJwt;

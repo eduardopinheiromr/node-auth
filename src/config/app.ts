@@ -1,6 +1,6 @@
 import express from "express";
 import bodyParser from "body-parser";
-import authMiddleware from "../modules/auth";
+import authMiddleware from "@modules/auth";
 import cors from "cors";
 
 const auth = authMiddleware();

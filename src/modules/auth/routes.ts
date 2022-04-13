@@ -1,9 +1,9 @@
-import { db } from "../../db";
-import { jwt } from "../../utils/token";
+import { db } from "@db";
+import { jwt } from "@utils/token";
 import { Express } from "express";
 
 import authMiddleware from "./";
-import { decrypt, encrypt } from "../../utils/encrypt";
+import { decrypt, encrypt } from "@utils/encrypt";
 const auth = authMiddleware();
 
 export const authRoutes = (app: Express) => {

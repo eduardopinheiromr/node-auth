@@ -15,6 +15,7 @@
     "rootDir": ".",
     "baseUrl": ".",
     "paths": {
+      "@db": ["src/db"],
       "@config/*": ["src/config/*"],
       "@modules/*": ["src/modules/*"],
       "@utils/*": ["src/utils/*"]

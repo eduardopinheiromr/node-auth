@@ -1,7 +1,7 @@
 import { Express } from "express";
-import { db } from "../../db";
+import { db } from "@db";
 
-import authMiddleware from "../auth";
+import authMiddleware from "@modules/auth";
 const auth = authMiddleware();
 
 export const productRoutes = (app: Express) => {

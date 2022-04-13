@@ -1,4 +1,4 @@
-import authMiddleware from "../auth";
+import authMiddleware from "@modules/auth";
 import multer from "multer";
 import { multerConfig } from "@config/multer";
 
