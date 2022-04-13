@@ -10,7 +10,15 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "incremental": true
+    "incremental": true,
+    "outDir": " ./dist",
+    "rootDir": ".",
+    "baseUrl": ".",
+    "paths": {
+      "@config/*": ["src/config/*"],
+      "@modules/*": ["src/modules/*"],
+      "@utils/*": ["src/utils/*"]
+    }
   },
   "include": ["**/*.d.ts", "**/*.ts"],
   "exclude": ["node_modules"]
