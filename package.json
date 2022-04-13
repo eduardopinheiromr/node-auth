@@ -5,8 +5,8 @@
   "main": "server.ts",
   "scripts": {
     "install:required": "yarn add -g nodemon ts-node env-cmd && yarn",
-    "dev": "env-cmd -f .env.development nodemon server.ts",
-    "start": "env-cmd -f .env.production ts-node server.ts"
+    "dev": "env-cmd -f .env.development ts-node-dev -r tsconfig-paths/register --no-notify server.ts",
+    "start": "env-cmd -f .env.production ts-node --require ts-path-mapping/register server.ts"
   },
   "keywords": [],
   "author": "Eduardo Pinheiro",
@@ -14,11 +14,13 @@
   "dependencies": {
     "bcrypt": "^5.0.1",
     "body-parser": "^1.19.2",
+    "cloudinary": "^1.29.0",
     "cors": "^2.8.5",
     "dotenv": "^16.0.0",
     "env-cmd": "^10.1.0",
     "express": "^4.17.2",
     "jwt-simple": "^0.5.6",
+    "multer": "^1.4.4",
     "nanoid": "^3.3.1",
     "passport": "^0.5.2",
     "passport-jwt": "^4.0.0",
@@ -27,8 +29,10 @@
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
     "@types/express": "^4.17.13",
+    "@types/multer": "^1.4.7",
     "@types/node": "^17.0.19",
-    "nodemon": "^2.0.15",
+    "ts-node-dev": "^1.1.8",
+    "tsconfig-paths": "^3.14.1",
     "typescript": "^4.5.5"
   }
 }
